@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chandu's Resume</title>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -25,14 +26,47 @@
             text-align: center;
             z-index: 100;
         }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 16px;
-            transition: 0.3s;
-        }
+        nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:#2575fc;
+    padding:18px 0;
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    z-index:1000;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:600;
+    padding:10px 0;
+    position:relative;
+    transition:.3s;
+}
+
+nav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    width:0;
+    height:3px;
+    background:#00ffff;
+    transition:.3s;
+}
+
+nav a:hover::after,
+nav a.active::after{
+    width:100%;
+}
+
+nav a:hover{
+    color:#00ffff;  
+}
         nav a:hover {
             color: #ffeb3b;
         }
@@ -59,11 +93,35 @@
             min-width: 300px;
             padding-right: 30px;
         }
-        #home .home-text h1 {
-            font-size: 50px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-        }
+         .home-text h3{
+    font-size:28px;
+    color:white;
+    margin-bottom:10px;
+}
+
+.home-text h1{
+    font-size:52px;
+    font-weight:700;
+    line-height:1.2;
+    margin:10px 0;
+}
+
+.home-text h1 span{
+    color:#00ffff;
+}
+
+.home-text h2{
+    font-size:30px;
+    color:#FFD700;
+    margin:20px 0;
+}
+
+.home-text p{
+    font-size:22px;
+    max-width:550px;
+    line-height:1.7;
+    margin-bottom:35px;
+}
         #home .home-text p {
             font-size: 22px;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
@@ -88,73 +146,83 @@
                         0 0 60px rgba(0,255,255,0.8),
                         0 0 90px rgba(0,255,255,0.6);
         }
+.home-buttons{
+    display:flex;
+    gap:20px;
+    margin-top:25px;
+}
 
+.btn{
+    text-decoration:none;
+    background:#00c6ff;
+    color:white;
+    padding:14px 30px;
+    border-radius:30px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:white;
+    color:#2575fc;
+}
+
+.btn2{
+    background:transparent;
+    border:2px solid white;
+}
          /* About Me Section */
-.about-me {
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    background: linear-gradient(135deg, #6a11cb, #2575fc); /* static gradient */
-    box-shadow: 0 0 30px rgba(0,255,255,0.3);
+
+      .about-me{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    padding:80px 40px;
+    background:linear-gradient(135deg,#6A11CB,#2575FC);
+    color:white;
+    border-radius:0;
 }
 
-/* Highlight text */
-.highlight {
-    color: #00ffff;
-    font-weight: bold;
-    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+ .about-content{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+    gap:25px;
+    margin-top:40px;
+}
+   
+.animated-text{
+  color:white;
+  margin-right: 140px;
+  font-size: 30px;
+}
+.about-card{
+    background:rgba(255,255,255,0.12);
+    padding:25px;
+    border-radius:15px;
+    backdrop-filter:blur(8px);
+    transition:0.4s;
+    text-align:left;
 }
 
-/* Text animation */
-.animated-text {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1s forwards;
-}
-.animated-text:nth-of-type(1) { animation-delay: 0.5s; }
-.animated-text:nth-of-type(2) { animation-delay: 1s; }
-.animated-text:nth-of-type(3) { animation-delay: 1.5s; }
-
-@keyframes fadeInUp {
-    to { opacity: 1; transform: translateY(0); }
-}
-   /* About Me Images Container */
-.about-image {
-    display: flex;
-    justify-content: center;  /* center the images horizontally */
-    gap: 20px;               /* space between images */
-    margin-top: 40px;        /* space from text */
-    flex-wrap: wrap;          /* wrap on smaller screens */
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 1s forwards;
-    animation-delay: 0.5s;
+.about-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 20px rgba(0,255,255,.5);
 }
 
-/* Individual images */
-.about-image img {
-    width: 380px;       /* same size for all images */
-    height: 320px;
-    object-fit: cover;  /* crop to fit nicely */
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,255,255,0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
+.about-card h3{
+    color:#00ffff;
+    margin-bottom:15px;
 }
 
-/* Hover effect */
-.about-image img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0,255,255,0.7);
+.about-card p,
+.about-card li{
+    color:white;
+    line-height:1.8;
 }
 
-/* Animation */
-@keyframes fadeUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.about-card ul{
+    padding-left:20px;
 }
 
 #skills {
@@ -655,7 +723,154 @@
     grid-template-columns: 1fr;
   }
 }
- 
+ .popup{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.75);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+opacity:0;
+visibility:hidden;
+
+transition:.4s;
+
+z-index:9999;
+
+backdrop-filter:blur(8px);
+
+}
+
+.popup.show{
+
+opacity:1;
+visibility:visible;
+
+}
+
+.popup-box{
+
+width:420px;
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(20px);
+
+padding:35px;
+
+border-radius:20px;
+
+transform:scale(.6);
+
+transition:.4s;
+
+box-shadow:0 0 40px cyan;
+
+}
+
+.popup.show .popup-box{
+
+transform:scale(1);
+
+}
+
+.popup-box h2{
+
+color:white;
+
+text-align:center;
+
+margin-bottom:25px;
+
+}
+
+.popup-box input,
+.popup-box textarea{
+
+width:100%;
+
+padding:15px;
+
+margin:12px 0;
+
+border:none;
+
+border-radius:10px;
+
+outline:none;
+
+font-size:16px;
+
+}
+
+.popup-box textarea{
+
+height:130px;
+
+resize:none;
+
+}
+
+.popup-box button{
+
+width:100%;
+
+padding:15px;
+
+background:#00d4ff;
+
+border:none;
+
+border-radius:30px;
+
+font-size:18px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.popup-box button:hover{
+
+background:white;
+
+color:#2575fc;
+
+transform:scale(1.05);
+
+}
+
+.close{
+
+position:absolute;
+
+right:25px;
+
+top:15px;
+
+font-size:30px;
+
+cursor:pointer;
+
+color:white;
+
+}
+.popup-box{
+    position:relative;
+}
+
+#openContact{
+    cursor:pointer;
+}
   /* Other Sections */
         h2 {
             color: #2575fc;
@@ -717,40 +932,78 @@
         <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
     </nav>
 
+     <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About Me</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+</nav>
     <!-- Home Section -->
     <section id="home">
         <div class="home-text">
-            <h1>Welcome to Chandu World</h1>
+            <h1>Hi, I'm Annapareddy Chandu Sai Ram</h1>
             <p>Discover my projects, skills, and more!</p>
         </div>
         <div class="home-image">
-            <img src="images/chandu.jpeg" alt="Chandu Photo">
+            <img src="C:\Users\agent\OneDrive\Desktop\wt\chandu.jpeg" alt="Chandu Photo">
         </div>
     </section>
 
     <!-- About Me Section -->
-    <section id="about" class="about-me">
-        <h1 class="animated-text">Hi, I’m <span class="highlight">Annapareddy Chandu Sai Ram</span></h1>
-        <p class="animated-text">
-            I’m passionate about <span class="highlight">web technologies, Java, and application development</span>.
-            I enjoy creating dynamic and user-friendly applications that solve real-world problems.
-        </p>
-        <p class="animated-text">
-            I’m always eager to learn new technologies and improve my skills in building efficient,
-            modern, and innovative software solutions. When I’m not coding, I like exploring new ideas
-            and experimenting with creative projects that challenge me to grow as a developer.No problem! I’ll give it to you in a **clean, plain format** so you can easily copy it anywhere:
-Collaboration is important to me—I love working in teams, sharing knowledge, and learning from others. When I’m not coding, you’ll find me **participating in hackathons, exploring emerging tech trends**, or experimenting with side projects that challenge my creativity.
-My goal is to create **efficient, modern, and impactful software** that not only works seamlessly but also leaves a positive impression on users. I believe continuous learning, curiosity, and creativity are the keys to becoming a great developer, and I’m always excited to take on new challenges that help me achieve that.
-<h1>i am very interested in the following</h1>
-        </p>
-<div class="about-image">
-<img src="C:\Users\agent\OneDrive\Desktop\wt\ad1.jpg" alt="image1">
-<img src="C:\Users\agent\OneDrive\Desktop\wt\jd.jpg" alt="image1">
-<img src="C:\Users\agent\OneDrive\Desktop\wt\wd.jpg" alt="image1">
+ 
+<section id="about" class="about-me">
 
-</div>
+    <h2 class="animated-text">About Me</h2>
 
-    </section>
+    <div class="about-content">
+
+        <div class="about-card">
+            <h3>Who I Am</h3>
+            <p>
+                Hello! I'm <span class="highlight">Annapareddy Chandu Sai Ram</span>, a passionate
+                Computer Science student with a strong interest in Web Development,
+                Java programming, and modern software technologies.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <h3>Career Objective</h3>
+            <p>
+                My goal is to become a skilled Full Stack Developer by continuously
+                learning new technologies and building innovative software that solves
+                real-world problems.
+            </p>
+        </div>
+
+        <div class="about-card">
+            <h3>My Interests</h3>
+            <ul>
+                <li>Web Development</li>
+                <li>Java Programming</li>
+                <li>UI/UX Design</li>
+                <li>Artificial Intelligence</li>
+                <li>Hackathons</li>
+            </ul>
+        </div>
+
+        <div class="about-card">
+            <h3>My Strengths</h3>
+            <ul>
+                <li>Problem Solving</li>
+                <li>Quick Learner</li>
+                <li>Team Collaboration</li>
+                <li>Communication Skills</li>
+                <li>Adaptability</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
 
 <section id="skills">
   <h2>My Skills</h2>
@@ -819,7 +1072,7 @@ My goal is to create **efficient, modern, and impactful software** that not only
 
     <!-- B.Tech -->
     <div class="edu-card">
-      <img src="images/srkr.jpg">
+      <img src="C:\Users\agent\OneDrive\Desktop\wt\srkr.jpg">
       <div class="edu-details">
         <h3>SRKR ENGINEERING COLLEGE,BHIMAVARAM(B.Tech)</h3>
         <p><strong>Year of Passing:</strong> 2028</p>
@@ -929,33 +1182,62 @@ My goal is to create **efficient, modern, and impactful software** that not only
 </section>
 
  <!-- Contact Section -->
-<section id="contact">
+ <section id="contact">
     <h2>Contact Me</h2>
+
     <div class="contact-container">
 
         <div class="contact-card">
             <i class="fas fa-phone-alt"></i>
-            <p>+9177425949</p>
+            <p>+91 7742594919</p>
         </div>
-
-        <div class="contact-card">
-            <i class="fas fa-envelope"></i>
-            <a href="agentchandu116@email.com">agenchandu116@email.com</a>
-        </div>
-
-        <div class="contact-card">
-            <i class="fab fa-linkedin"></i>
-            <a href="https://linkedin.com/in/chandu/" target="_blank">LinkedIn</a>
-        </div>
-
-        <div class="contact-card">
-            <i class="fab fa-instagram"></i>
-            <a href="https://instagram.com/agentchandu/" target="_blank">Instagram</a>
-        </div>
+        <div class="contact-card" id="openContact">
+    <i class="fas fa-envelope"></i>
+    <p>Email Me</p>
+</div>
 
     </div>
-</section>
 
+    <br><br>
+
+ 
+</section>
+<div class="popup" id="popup">
+
+ <div class="popup-box">
+
+    <span class="close">&times;</span>
+
+    <h2>Send Me a Message</h2>
+
+    <form id="contact-form">
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required>
+
+        <textarea
+            name="message"
+            placeholder="Write your message..."
+            required></textarea>
+
+        <button type="submit">
+            Send Message
+        </button>
+
+    </form>
+
+</div>
+
+</div>
     <!-- Footer -->
     <footer>
         <a href="https://github.com/chandu" target="_blank"><i class="fab fa-github"></i> GitHub</a>
@@ -963,6 +1245,72 @@ My goal is to create **efficient, modern, and impactful software** that not only
         <a href="https://your-portfolio.com" target="_blank"><i class="fas fa-folder-open"></i> Portfolio</a>
         <a href="mailto:chandu@email.com"><i class="fas fa-envelope"></i> Contact</a>
     </footer>
+   <script>
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
 
+window.onscroll = () => {
+    let current = "";
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+
+        if (window.scrollY >= sectionTop) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+        }
+    });
+};
+
+ const popup = document.getElementById("popup");
+
+document.getElementById("openContact").onclick = () => {
+    popup.classList.add("show");
+};
+
+document.querySelector(".close").onclick = () => {
+    popup.classList.remove("show");
+};
+
+window.onclick = (e) => {
+    if (e.target === popup) {
+        popup.classList.remove("show");
+    }
+};
+emailjs.init("hnoZUAuMaiIXEeIXn");
+
+document.getElementById("contact-form").addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    emailjs.sendForm(
+        "service_e00isw5",
+        "template_8sh6pgg",
+        this
+    ).then(() => {
+
+        alert("Message Sent Successfully!");
+
+        popup.classList.remove("show");
+
+        this.reset();
+
+    }).catch((error) => {
+
+        console.log(error);
+
+        alert("Failed to send message");
+
+    });
+
+});
+</script>
 </body>
 </html>
